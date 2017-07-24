@@ -709,7 +709,7 @@ static NSUUID *sessionID;
 
     SimServiceContext *sc = [SimServiceContext sharedServiceContextForDeveloperDir:self.xcodePath error: err];
     if (!sc) {
-        [BPUtils printInfo:ERROR withString:@"Failed to initialize SimServiceContext: %@", *err];
+        [BPUtils printInfo:ERROR withString:@"Failed to initialize SimServiceContext: %@ - %@", *err, self.xcodePath];
         return NO;
     }
 
