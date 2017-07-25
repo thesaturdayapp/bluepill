@@ -64,7 +64,7 @@ bluepill_build()
     -workspace Bluepill.xcworkspace \
     -scheme bluepill \
     -configuration Release \
-    -derivedDataPath "build/" | tee result.txt | $XCPRETTY
+    -derivedDataPath "build/" | tee -a result.txt | $XCPRETTY
 
   test $? == 0 || {
           echo Build failed
@@ -86,7 +86,7 @@ bluepill_build_sample_app()
     -scheme BPSampleApp \
     -sdk iphonesimulator \
     -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1' \
-    -derivedDataPath "build/" 2>&1 | tee result.txt | $XCPRETTY
+    -derivedDataPath "build/" 2>&1 | tee -a result.txt | $XCPRETTY
 
   test $? == 0 || {
           echo Build failed
@@ -102,7 +102,7 @@ bluepill_instance_tests()
   xcodebuild test \
     -workspace Bluepill.xcworkspace \
     -scheme BPInstanceTests$n \
-    -derivedDataPath "build/" 2>&1 | tee result.txt | $XCPRETTY
+    -derivedDataPath "build/" 2>&1 | tee -a result.txt | $XCPRETTY
 
   if ! grep '\*\* TEST SUCCEEDED \*\*' result.txt; then
     echo 'Test failed'
@@ -117,7 +117,7 @@ bluepill_runner_tests()
   xcodebuild test \
     -workspace Bluepill.xcworkspace \
     -scheme BluepillRunnerTests \
-    -derivedDataPath "build/" 2>&1 | tee result.txt | $XCPRETTY
+    -derivedDataPath "build/" 2>&1 | tee -a result.txt | $XCPRETTY
 
   if ! grep '\*\* TEST SUCCEEDED \*\*' result.txt; then
     echo 'Test failed'
@@ -132,7 +132,7 @@ bluepill_integration_tests()
   xcodebuild test \
     -workspace Bluepill.xcworkspace \
     -scheme BluepillIntegrationTests \
-    -derivedDataPath "build/" 2>&1 | tee result.txt
+    -derivedDataPath "build/" 2>&1 | tee -a result.txt
 
   if ! grep '\*\* TEST SUCCEEDED \*\*' result.txt; then
     echo 'Test failed'
